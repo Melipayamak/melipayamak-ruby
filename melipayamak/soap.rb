@@ -78,6 +78,21 @@ class Soap
         response = client.call(:send_with_domain, message:data.merge(get_data))
         response.body
     end
+    def send_by_base_number(text, to, bodyId)
+        client = Savon.client(wsdl: @sendUrl)
+        response = nil
+        data = {
+            :text => text,
+            :to => to,
+            :bodyId => bodyId
+        }
+        if text.kind_of?(Array)
+            response = client.call(:send_by_base_number, message:data.merge(get_data))
+        else
+            response = client.call(:send_by_base_number2, message:data.merge(get_data))
+        end
+        response.body
+    end
     def get_messages(location, index, count, from="")
         client = Savon.client(wsdl: @sendUrl)
         data = {
