@@ -143,6 +143,13 @@ sms_soap.send(to,from,text,is_flash)
 ```
 * در وب سرویس soap به جای ارسال یک شماره آرایه ای از شماره ها نیز قابل قبول است
 
+#### ارسال از خط خدماتی اشتراکی
+
+```ruby
+sms_rest.send_by_base_number(text, to, bodyId)
+sms_soap.send_by_base_number(text, to, bodyId)
+```
+
 #### دریافت وضعیت ارسال
 ```ruby
 sms_rest.is_delivered(recId)
