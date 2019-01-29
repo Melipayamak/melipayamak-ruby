@@ -25,6 +25,15 @@ class Rest
         }
         request(url,data.merge(get_data))
     end
+    def send_by_base_number(text, to, bodyId)
+        url = sprintf @@path,"BaseServiceNumber"
+        data = {
+            :text=>text,
+            :to=>to,
+            :bodyId=>bodyId
+        }
+        request(url,data.merge(get_data))
+    end
     def is_delivered(recId)
         url = sprintf @@path,"GetDeliveries2"
         data = {
