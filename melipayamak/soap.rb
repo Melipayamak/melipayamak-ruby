@@ -208,6 +208,39 @@ class Soap
         response = client.call(:get_send_sms_with_speech_text_status, message:data.merge(get_data))
         response.body
     end
+    def send_bulk_speech_text(title, body, receivers, DateToSend, repeatCount)
+        client = Savon.client(wsdl: @voiceUrl)
+        data = {
+            :title => title,
+            :body => body,
+            :receivers => receivers,
+            :DateToSend => DateToSend,
+            :repeatCount => repeatCount
+        }
+        response = client.call(:send_bulk_speech_text, message:data.merge(get_data))
+        response.body
+    end
+    def send_bulk_voice_sms(title, voiceFileId, receivers, DateToSend, repeatCount)
+        client = Savon.client(wsdl: @voiceUrl)
+        data = {
+            :title => title,
+            :voiceFileId => voiceFileId,
+            :receivers => receivers,
+            :DateToSend => DateToSend,
+            :repeatCount => repeatCount
+        }
+        response = client.call(:send_bulk_voice_sms, message:data.merge(get_data))
+        response.body
+    end
+    def upload_voice_file(title, base64StringFile)
+        client = Savon.client(wsdl: @voiceUrl)
+        data = {
+            :title => title,
+            :base64StringFile => base64StringFile
+        }
+        response = client.call(:upload_voice_file, message:data.merge(get_data))
+        response.body
+    end
     def get_multi_delivery(recId)
         client = Savon.client(wsdl: @sendUrl)
         data = {
