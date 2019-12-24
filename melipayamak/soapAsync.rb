@@ -1,6 +1,6 @@
 require 'savon'
 
-class Soap
+class SoapAsync
     @@path = "http://api.payamak-panel.com/post/%s.asmx?wsdl"
     def initialize(username, password)
         @username = username
@@ -18,7 +18,9 @@ class Soap
     end
     def get_credit
         client = Savon.client(wsdl: @sendUrl)
-        response = client.call(:get_credit, message:get_data)
+        response = nil
+        t = Thread.new{response = client.call(:get_credit, message:get_data)}
+        t.join
         response.body
     end
     def is_delivered recId
@@ -28,13 +30,16 @@ class Soap
             data = {
                 :recIds => recId
             }
-            response = client.call(:get_deliveries, message:data.merge(get_data))
+            t = Thread.new{response = client.call(:get_deliveries, message:data.merge(get_data))}
+            t.join
         else
             data = {
                 :recId => recId
             }
-            response = client.call(:get_delivery, message:data.merge(get_data))
+            t = Thread.new{response = client.call(:get_delivery, message:data.merge(get_data))}
+            t.join
         end
+
         response.body
     end
     def send(to, from, text, isflash=false)
@@ -47,10 +52,13 @@ class Soap
             :isflash => isflash
         }
         if to.kind_of?(Array)
-            response = client.call(:send_simple_sms, message:data.merge(get_data))
+            t = Thread.new{response = client.call(:send_simple_sms, message:data.merge(get_data))}
+            t.join
         else
-            response = client.call(:send_simple_sms2, message:data.merge(get_data))
+            t = Thread.new{response = client.call(:send_simple_sms2, message:data.merge(get_data))}
+            t.join
         end
+        
         response.body
     end
     def send2(to, from, text, isflash= false,udh="")
@@ -63,7 +71,9 @@ class Soap
             :isflash => isflash,
             :udh => udh
         }
-        response = client.call(:send_sms, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:send_sms, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def send_with_domain(to, from, text, isflash, domainName)
@@ -75,7 +85,9 @@ class Soap
             :isflash => isflash,
             :domainName => domainName
         }
-        response = client.call(:send_with_domain, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:send_with_domain, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def send_by_base_number(text, to, bodyId)
@@ -87,9 +99,11 @@ class Soap
             :bodyId => bodyId
         }
         if text.kind_of?(Array)
-            response = client.call(:send_by_base_number, message:data.merge(get_data))
+            t = Thread.new{response = client.call(:send_by_base_number, message:data.merge(get_data))}
+            t.join
         else
-            response = client.call(:send_by_base_number2, message:data.merge(get_data))
+            t = Thread.new{response = client.call(:send_by_base_number2, message:data.merge(get_data))}
+            t.join
         end
         response.body
     end
@@ -101,7 +115,9 @@ class Soap
             :index => index,
             :count => count
         }
-        response = client.call(:get_messages, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_messages, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_messages_str(location, index, count, from="")
@@ -112,7 +128,9 @@ class Soap
             :index => index,
             :count => count
         }
-        response = client.call(:get_message_str, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_message_str, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_messages_by_date( location, index, count, dateFrom, dateTo, from="")
@@ -125,7 +143,9 @@ class Soap
             :dateFrom => dateFrom,
             :dateTo => dateTo
         }
-        response = client.call(:get_messages_by_date, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_messages_by_date, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_messages_receptions(msgId, fromRows)
@@ -134,7 +154,9 @@ class Soap
             :msgId => msgId,
             :fromRows => fromRows
         }
-        response = client.call(:get_messages_receptions, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_messages_receptions, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_users_messages_by_date(location, index, count, from,dateFrom, dateTo)
@@ -147,7 +169,9 @@ class Soap
             :dateFrom => dateFrom,
             :dateTo => dateTo
         }
-        response = client.call(:get_users_messages_by_date, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_users_messages_by_date, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def remove(msgIds)
@@ -155,7 +179,9 @@ class Soap
         data = {
             :msgIds => msgIds
         }
-        response = client.call(:remove_messages2, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:remove_messages2, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_price(irancellCount, mtnCount,  from, text)
@@ -166,7 +192,9 @@ class Soap
             :from => from,
             :text => text
         }
-        response = client.call(:get_sms_price, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_sms_price, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_inbox_count(isRead=false)
@@ -174,7 +202,9 @@ class Soap
         data = {
             :isRead => isRead
         }
-        response = client.call(:get_inbox_count, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_inbox_count, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def send_with_speech(to, from, text, speech)
@@ -185,7 +215,9 @@ class Soap
             :smsBody => text,
             :speechBody => speech
         }
-        response = client.call(:send_sms_with_speech_text, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:send_sms_with_speech_text, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def send_with_speech_schdule_date(to, from, text, speech, scheduleDate)
@@ -197,7 +229,9 @@ class Soap
             :speechBody => speech,
             :scheduleDate => scheduleDate
         }
-        response = client.call(:send_sms_with_speech_text_by_schdule_date, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:send_sms_with_speech_text_by_schdule_date, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_send_with_speech(recId)
@@ -205,7 +239,9 @@ class Soap
         data = {
             :recId => recId
         }
-        response = client.call(:get_send_sms_with_speech_text_status, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_send_sms_with_speech_text_status, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_multi_delivery(recId)
@@ -213,7 +249,9 @@ class Soap
         data = {
             :recId => recId
         }
-        response = client.call(:get_multi_delivery2, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_multi_delivery2, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def send_multiple_schedule(to, from, text, isflash, scheduleDateTime, period)
@@ -226,7 +264,9 @@ class Soap
             :scheduleDateTime => scheduleDateTime,
             :period => period
         }
-        response = client.call(:add_multiple_schedule, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:add_multiple_schedule, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def send_schedule(to, from, text, isflash, scheduleDateTime, period)
@@ -239,7 +279,9 @@ class Soap
             :scheduleDateTime => scheduleDateTime,
             :period => period
         }
-        response = client.call(:add_schedule, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:add_schedule, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def get_schedule_status(scheduleId)
@@ -247,7 +289,9 @@ class Soap
         data = {
             :scheduleId => scheduleId
         }
-        response = client.call(:get_schedule_status, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:get_schedule_status, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def remove_schedule(scheduleId)
@@ -255,7 +299,9 @@ class Soap
         data = {
             :scheduleId => scheduleId
         }
-        response = client.call(:remove_schedule, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:remove_schedule, message:data.merge(get_data))}
+        t.join
         response.body
     end
     def add_usance(to, from, text, isflash, scheduleStartDateTime, repeatAfterDays, scheduleEndDateTime)
@@ -269,7 +315,9 @@ class Soap
             :scheduleEndDateTime => scheduleEndDateTime,
             :isflash => isflash
         }
-        response = client.call(:add_usance, message:data.merge(get_data))
+        response = nil
+        t = Thread.new{response = client.call(:add_usance, message:data.merge(get_data))}
+        t.join
         response.body
     end
 end

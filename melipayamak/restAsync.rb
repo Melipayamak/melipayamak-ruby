@@ -1,6 +1,6 @@
 require "http"
 
-class Rest
+class RestAsync
     @@path = "https://rest.payamak-panel.com/api/SendSMS/%s"
     
     def initialize(username, password)
@@ -27,7 +27,10 @@ class Rest
             :text=>text,
             :isFlash=>isFlash
         }
-        request(url,data.merge(get_data))
+        result = nil
+        t = Thread.new{ result = request(url,data.merge(get_data)) }
+        t.join
+        result
     end
     
     def send_by_base_number(text, to, bodyId)
@@ -37,7 +40,10 @@ class Rest
             :to=>to,
             :bodyId=>bodyId
         }
-        request(url,data.merge(get_data))
+        result = nil
+        t = Thread.new{ result = request(url,data.merge(get_data)) }
+        t.join
+        result
     end
     
     def is_delivered(recId)
@@ -45,7 +51,10 @@ class Rest
         data = {
             :recId=>recId,
         }
-        request(url,data.merge(get_data))
+        result = nil
+        t = Thread.new{ result = request(url,data.merge(get_data)) }
+        t.join
+        result
     end
     
     def get_messages(location, index, count, from="")
@@ -56,22 +65,34 @@ class Rest
             :count=> count,
             :from=> from
         }
-        request(url,data.merge(get_data))
+        result = nil
+        t = Thread.new{ result = request(url,data.merge(get_data)) }
+        t.join
+        result
     end
     
     def get_credit
         url = sprintf @@path,"GetCredit"
-        request(url,get_data)
+        result = nil
+        t = Thread.new{ result = request(url,get_data) }
+        t.join
+        result
     end
     
     def get_base_price
         url = sprintf @@path,"GetBasePrice"
-        request(url,get_data)
+        result = nil
+        t = Thread.new{ result = request(url,get_data) }
+        t.join
+        result
     end
     
     def get_numbers
         url = sprintf @@path,"GetUserNumbers"
-        request(url,get_data)
+        result = nil
+        t = Thread.new{ result = request(url,get_data) }
+        t.join
+        result
     end
  
  end
