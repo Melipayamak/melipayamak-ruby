@@ -39,7 +39,7 @@ gem "savon"
 </div>
 
 ```
-$ bundle
+$ bundle install
 ```
 
 <div dir='rtl'>
@@ -58,9 +58,15 @@ $ gem install savon
 
 <div dir='rtl'>
 
-سپس repository را دانلود کنید
+سپس repository   یا از طریق دستور زیر، افزونه وب سرویس را بصورت جم نصب کنید : را دانلود کنید
 
-	
+</div>	
+
+```
+$ gem install melipayamak
+```
+
+<div dir='rtl'>
 	
 #### نحوه استفاده
 نمونه کد برای ارسال پیامک
@@ -106,6 +112,26 @@ users = api.users
 //وب سرویس دفترچه تلفن
 contacts = api.contacts
 
+```
+
+<div dir='rtl'>
+
+##### حالت آسنکرون
+شما میتوانید از نسخه آسنکرون بصورت زیر استفاده کنید :	
+</div>
+
+```php
+// وب سرویس پیامک
+$smsRestAsync = $api->sms('rest', 'async');
+$smsSoapAsync = $api->sms('soap', 'async');
+// وب سرویس تیکت پشتیبانی
+$ticket = $api->ticketAsync();
+// وب سرویس برای مدیریت کامل  ارسال انبوه پیامک
+$branch = $api->branchAsync();
+//وب سرویس کاربران
+$users = $api->usersAsync();
+//وب سرویس دفترچه تلفن
+$contacts = $api->contactsAsync();
 ```
 
 
