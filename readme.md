@@ -105,16 +105,15 @@ puts response
 </div>
 
 ```ruby
-// وب سرویس پیامک
 sms_rest = api.sms
 sms_soap = api.sms('soap')
-// وب سرویس تیکت پشتیبانی
+# وب سرویس تیکت پشتیبانی
 ticket = api.ticket
-// وب سرویس برای مدیریت کامل  ارسال انبوه پیامک
+# وب سرویس برای مدیریت کامل  ارسال انبوه پیامک
 branch = api.branch
-//وب سرویس کاربران
+# وب سرویس کاربران
 users = api.users
-//وب سرویس دفترچه تلفن
+# وب سرویس دفترچه تلفن
 contacts = api.contacts
 
 ```
@@ -125,18 +124,18 @@ contacts = api.contacts
 شما میتوانید از نسخه آسنکرون بصورت زیر استفاده کنید :	
 </div>
 
-```php
-// وب سرویس پیامک
-$smsRestAsync = $api->sms('rest', 'async');
-$smsSoapAsync = $api->sms('soap', 'async');
-// وب سرویس تیکت پشتیبانی
-$ticket = $api->ticketAsync();
-// وب سرویس برای مدیریت کامل  ارسال انبوه پیامک
-$branch = $api->branchAsync();
-//وب سرویس کاربران
-$users = $api->usersAsync();
-//وب سرویس دفترچه تلفن
-$contacts = $api->contactsAsync();
+```ruby
+
+smsRestAsync = api.sms('rest', 'async');
+smsSoapAsync = api.sms('soap', 'async');
+# وب سرویس تیکت پشتیبانی
+ticket = api.ticketAsync();
+# وب سرویس برای مدیریت کامل  ارسال انبوه پیامک
+branch = api.branchAsync();
+# وب سرویس کاربران
+users = api.usersAsync();
+# وب سرویس دفترچه تلفن
+contacts = api.contactsAsync();
 ```
 
 
@@ -192,11 +191,11 @@ sms_soap.is_delivered(recId)
 sms_rest.get_messages(location,index,count,from)
 sms_soap.get_messages(location,index,count,from)
 sms_soap.get_messages_str(location,index,count,from)
-// جهت دریافت به صورت رشته ای
+# جهت دریافت به صورت رشته ای
 sms_soap.get_messages_by_date(location,index,count,from,date_from,date_to)
-//جهت دریافت بر اساس تاریخ
+# جهت دریافت بر اساس تاریخ
 sms_soap.get_users_messages_by_date(location,index,count,from,date_from,date_to)
-// جهت دریافت پیام های کاربران بر اساس تاریخ 
+# جهت دریافت پیام های کاربران بر اساس تاریخ 
 ```
 
 #### موجودی
@@ -218,7 +217,7 @@ sms_rest.get_numbers
 #### بررسی تعداد پیامک های دریافتی
 ```ruby
 sms_soap.get_inbox_count(is_read)
-//پیش فرض خوانده نشده 
+# پیش فرض خوانده نشده 
 ```
 
 #### ارسال پیامک پیشرفته
