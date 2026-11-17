@@ -1,23 +1,10 @@
 # Melipayamak Ruby
 
-![Ruby](https://img.shields.io/badge/Ruby-3.3-CC342D?logo=ruby&logoColor=white)
-![License](https://img.shields.io/github/license/Melipayamak/melipayamak-ruby)
-![Build](https://img.shields.io/github/actions/workflow/status/Melipayamak/melipayamak-ruby/ci.yml?label=build)
-![GitHub Stars](https://img.shields.io/github/stars/Melipayamak/melipayamak-ruby)
-![GitHub Issues](https://img.shields.io/github/issues/Melipayamak/melipayamak-ruby)
-![Last Commit](https://img.shields.io/github/last-commit/Melipayamak/melipayamak-ruby)
-![Contributors](https://img.shields.io/github/contributors/Melipayamak/melipayamak-ruby)
-![Pull Requests](https://img.shields.io/github/issues-pr/Melipayamak/melipayamak-ruby)
-
+![Ruby](https://img.shields.io/badge/Ruby-3.1-CC342D?logo=ruby&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![RubyGems](https://img.shields.io/gem/v/melipayamak)
 ![Gem Downloads](https://img.shields.io/gem/dt/melipayamak)
-![RubyGems License](https://img.shields.io/gem/l/melipayamak)
-![RSpec](https://img.shields.io/badge/testing-RSpec-CC342D?logo=ruby)
-![RuboCop](https://img.shields.io/badge/code%20style-RuboCop-blue)
-![Bundler](https://img.shields.io/badge/dependencies-Bundler-CC342D?logo=ruby)
-
-![Rails](https://img.shields.io/badge/Rails-7.2-CC0000?logo=rubyonrails&logoColor=white)
-![Active Record](https://img.shields.io/badge/ActiveRecord-CC0000)
 
 <div dir='rtl'>
 
