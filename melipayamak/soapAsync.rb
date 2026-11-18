@@ -403,4 +403,12 @@ class SoapAsync
     t.join
     response.body
   end
+
+  def get_out_box_count()
+    client = Savon.client(wsdl: @receiveUrl)
+    response = nil
+    t = Thread.new { client.call(:get_out_box_count, message: get_data) }
+    t.join
+    response.body
+  end
 end
