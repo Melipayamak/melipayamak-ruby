@@ -465,4 +465,79 @@ class SoapAsync
     t.join
     response.body
   end
+
+  def get_send_speech_text_status(recId)
+    client = Savon.client(wsdl: @voiceUrl)
+    data = {
+      recId: recId
+    }
+    response = nil
+    t = Thread.new { response = client.call(:get_send_speech_text_status, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def get_send_speech_text_statuses(recIds)
+    client = Savon.client(wsdl: @voiceUrl)
+    data = {
+      recIds: recIds
+    }
+    response = nil
+    t = Thread.new { response = client.call(:get_send_speech_text_statuses, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def send_bulk_speech_text(title, body, receivers, dateToSend, repeatCount)
+    client = Savon.client(wsdl: @voiceUrl)
+    data = {
+      title: title,
+      body: body,
+      receivers: receivers,
+      DateToSend: dateToSend,
+      RepeatCount: repeatCount
+    }
+    response = nil
+    t = Thread.new { response = client.call(:send_bulk_speech_text, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def send_bulk_voice_sms(title, voiceFileId, receivers, dateToSend, repeatCount)
+    client = Savon.client(wsdl: @voiceUrl)
+    data = {
+      title: title,
+      voiceFileId: voiceFileId,
+      receivers: receivers,
+      DateToSend: dateToSend,
+      repeatCount: repeatCount
+    }
+    response = nil
+    t = Thread.new { response = client.call(:send_bulk_voice_sms, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def send_speech_text(text, to)
+    client = Savon.client(wsdl: @voiceUrl)
+    data = {
+      text: text,
+      to: to
+    }
+    response = nil
+    t = Thread.new { response = client.call(:send_speech_text, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def send_voice_otp(to, code)
+    client = Savon.client(wsdl: @voiceUrl)
+    data = {
+      to: to, code: code
+    }
+    response = nil
+    t = Thread.new { response = client.call(:send_voice_otp, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
 end
