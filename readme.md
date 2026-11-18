@@ -83,7 +83,7 @@ $ gem install melipayamak
 
 
 ```ruby
-require_relative "melipayamak/melipayamakapi"
+require "melipayamakapi"
 username = 'username'
 password = 'password'
 api = Melipayamakapi.new(username,password)
