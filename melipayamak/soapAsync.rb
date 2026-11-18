@@ -411,4 +411,58 @@ class SoapAsync
     t.join
     response.body
   end
+
+  def add_new_usance(to, from, text, isflash, scheduleStartDateTime, countrepeat, scheduleEndDateTime, periodType)
+    client = Savon.client(wsdl: @scheduleUrl)
+    data = {
+      to: to,
+      from: from,
+      text: text,
+      isflash: isflash,
+      scheduleStartDateTime: scheduleStartDateTime,
+      countrepeat: countrepeat,
+      scheduleEndDateTime: scheduleEndDateTime,
+      periodType: periodType
+    }
+    response = nil
+    t = Thread.new { response = client.call(:add_new_usance, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def add_schedule_send_by_base_number2(to, text, bodyId, scheduleDate)
+    client = Savon.client(wsdl: @scheduleUrl)
+    data = {
+      to: to,
+      text: text,
+      bodyId: bodyId,
+      scheduleDate: scheduleDate
+    }
+    response = nil
+    t = Thread.new { response = client.call(:add_schedule_send_by_base_number2, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def get_schedule_details(scheduleId)
+    client = Savon.client(wsdl: @scheduleUrl)
+    data = {
+      scheduleId: scheduleId
+    }
+    response = nil
+    t = Thread.new { response = client.call(:get_schedule_details, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
+
+  def remove_schedule_list(scheduleIdList)
+    client = Savon.client(wsdl: @scheduleUrl)
+    data = {
+      scheduleIdList: scheduleIdList
+    }
+    response = nil
+    t = Thread.new { response = client.call(:remove_schedule_list, message: data.merge(get_data)) }
+    t.join
+    response.body
+  end
 end
