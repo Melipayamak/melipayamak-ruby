@@ -9,9 +9,9 @@ class Soap
     @receiveUrl = format @@path, 'receive'
     @voiceUrl = format @@path, 'Voice'
     @scheduleUrl = format @@path, 'Schedule'
-    @newBulksUrl = format @path, 'newbulks'
-    @smartUrl = format @path, 'Smartsms'
-    @blackListUrl = format @path, 'blacklist'
+    @newBulksUrl = format @@path, 'newbulks'
+    @smartUrl = format @@path, 'Smartsms'
+    @blackListUrl = format @@path, 'blacklist'
   end
 
   def get_data
