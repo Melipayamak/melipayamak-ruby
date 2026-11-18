@@ -9,6 +9,9 @@ class Soap
     @receiveUrl = format @@path, 'receive'
     @voiceUrl = format @@path, 'Voice'
     @scheduleUrl = format @@path, 'Schedule'
+    @newBulksUrl = format @path, 'newbulks'
+    @smartUrl = format @path, 'Smartsms'
+    @blackListUrl = format @path, 'blacklist'
   end
 
   def get_data
@@ -458,6 +461,142 @@ class Soap
       to: to, code: code
     }
     response = client.call(:send_voice_otp, message: data.merge(get_data))
+    response.body
+  end
+
+  def add_number_bulk(from, title, message, receivers, dateToSend)
+    client = Savon.client(wsdl: @newBulksUrl)
+    data = {
+      from: from,
+      title: title,
+      message: message,
+      receivers: receivers,
+      DateToSend: dateToSend
+    }
+    response = client.call(:add_number_bulk, message: data.merge(get_data))
+    response.body
+  end
+
+  def add_number_bulk2(from, body, to)
+    client = Savon.client(wsdl: @newBulksUrl)
+    data = {
+      from: from,
+      body: body,
+      to: to
+    }
+    response = client.call(:add_number_bulk2, message: data.merge(get_data))
+    response.body
+  end
+
+  def get_bulk_deliveries(recIds)
+    client = Savon.client(wsdl: @newBulksUrl)
+    data = {
+      recIds: recIds
+    }
+    response = client.call(:get_bulk_deliveries, message: data.merge(get_data))
+    response.body
+  end
+
+  def get_bulk_deliveries2(recId)
+    client = Savon.client(wsdl: @newBulksUrl)
+    data = {
+      recId: recId
+    }
+    response = client.call(:get_bulk_deliveries2, message: data.merge(get_data))
+    response.body
+  end
+
+  def get_bulk_details(bulkdId)
+    client = Savon.client(wsdl: @newBulksUrl)
+    data = {
+      bulkdId: bulkdId
+    }
+    response = client.call(:get_bulk_details, message: data.merge(get_data))
+    response.body
+  end
+
+  def send_sms_to_contact(message, title, from, groupId, dateToSend)
+    client = Savon.client(wsdl: @newBulksUrl)
+    data = {
+      message: message,
+      title: title,
+      from: from,
+      groupId: groupId,
+      dateToSend: dateToSend
+    }
+    response = client.call(:send_sms_to_contact, message: data.merge(get_data))
+    response.body
+  end
+
+  def get_smart_sms_deliveries(ids)
+    client = Savon.client(wsdl: @smartUrl)
+    data = {
+      Id: ids
+    }
+    response = client.call(:get_smart_sms_deliveries, message: data.merge(get_data))
+    response.body
+  end
+
+  def get_smart_sms_details(id)
+    client = Savon.client(wsdl: @smartUrl)
+    data = {
+      Id: id
+    }
+    response = client.call(:get_smart_sms_details, message: data.merge(get_data))
+    response.body
+  end
+
+  def send_multiple_smart_sms(to, text, from, fromSupportOne, fromSupportTwo)
+    client = Savon.client(wsdl: @smartUrl)
+    data = {
+      to: to,
+      text: text,
+      from: from,
+      fromSupportOne: fromSupportOne,
+      fromSupportTwo: fromSupportTwo
+    }
+    response = client.call(:send_multiple_smart_sms, message: data.merge(get_data))
+    response.body
+  end
+
+  def send_smart_sms(to, text, from, fromSupportOne, fromSupportTwo)
+    client = Savon.client(wsdl: @smartUrl)
+    data = {
+      to: to,
+      text: text,
+      from: from,
+      fromSupportOne: fromSupportOne,
+      fromSupportTwo: fromSupportTwo
+    }
+    response = client.call(:send_smart_sms, message: data.merge(get_data))
+    response.body
+  end
+
+  def add_black_list(number, type)
+    client = Savon.client(wsdl: @blackListUrl)
+    data = {
+      number: number,
+      type: type
+    }
+    response = client.call(:add_black_list, message: data.merge(get_data))
+    response.body
+  end
+
+  def add_mobile(listId, type, mobileNumbers, addBySms)
+    client = Savon.client(wsdl: @blackListUrl)
+    data = {
+      listId: listId,
+      type: type,
+      mobileNumbers: mobileNumbers,
+      addBySms: addBySms
+    }
+    response = client.call(:add_mobile, message: data.merge(get_data))
+    response.body
+  end
+
+  def get_black_lists()
+    client = Savon.client(wsdl: @blackListUrl)
+    response = client.call(:get_black_lists, message: get_data)
     response.body
   end
   
